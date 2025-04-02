@@ -1,4 +1,4 @@
-# {{ tmplr.project_name }}
+# {{ tmplr.project_title }}
 {{ tmplr.project_description }}
 
 ## Requirements

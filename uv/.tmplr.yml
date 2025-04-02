@@ -8,6 +8,10 @@ steps:
       fallback:
         prompt: Please enter a project name
 
+  # Create a title case version of the project name
+  - read: project_title
+    eval: '{{ project_name | Capital Case }}'
+
   # Read project description with a default value
   - read: project_description
     prompt: Provide a brief description of your project
