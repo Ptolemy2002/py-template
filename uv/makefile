@@ -10,4 +10,4 @@ rmzi:
 
 start:
 	mkdir -p $(OUTPUT_DIR) && \
-	uv run ./main.py 2>&1 | tee $(OUTPUT_DIR)/log.txt
+	uv run ./main.py $(ARGS) 2>&1 | tee $(OUTPUT_DIR)/log.txt
