@@ -2,7 +2,7 @@
 
 DATE := $(shell date '+%Y/%m/%d')
 TIME := $(shell date '+%H-%M-%S')
-OUTPUT_DIR = outputs/$(DATE)/$(TIME)
+MAIN_OUTPUT_DIR = outputs/main/$(DATE)/$(TIME)
 
 uv-install:
 	curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -16,5 +16,5 @@ rm-outputs:
 reset: rm-outputs
 
 start:
-	mkdir -p $(OUTPUT_DIR) && \
-	uv run ./main.py $(ARGS) 2>&1 | tee $(OUTPUT_DIR)/log.txt
+	mkdir -p $(MAIN_OUTPUT_DIR) && \
+	uv run ./main.py $(ARGS) 2>&1 | tee $(MAIN_OUTPUT_DIR)/log.txt
