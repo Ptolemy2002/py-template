@@ -1,7 +1,8 @@
-.PHONY: uv-install rmzi rm-outputs start
+.PHONY: uv-install rmzi rm-outputs rm-pycache reset start zip
 
 DATE := $(shell date '+%Y/%m/%d')
 TIME := $(shell date '+%H-%M-%S')
+
 MAIN_OUTPUT_DIR = outputs/main/$(DATE)/$(TIME)
 
 uv-install:
@@ -12,8 +13,11 @@ rmzi:
 
 rm-outputs:
 	rm -rf ./outputs
+	
+rm-pycache:
+	rm -rf __pycache__ **/__pycache__
 
-reset: rm-outputs
+reset: rmzi rm-outputs rm-pycache
 
 start:
 	mkdir -p $(MAIN_OUTPUT_DIR) && \
