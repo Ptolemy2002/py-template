@@ -36,6 +36,12 @@ steps:
   # Update README.md
   - update: README.md
     include hidden: true
+
+  # Update man.txt and make-man.txt
+  - update: man.txt
+    include hidden: true
+  - update: make-man.txt
+    include hidden: true
   
   # Remove uv.lock file if it exists
   - if:

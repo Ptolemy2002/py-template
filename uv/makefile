@@ -1,4 +1,4 @@
-.PHONY: uv-install rmzi rm-outputs rm-pycache rm-venv reset start help
+.PHONY: uv-install rmzi rm-lock rm-outputs rm-pycache rm-venv reset start help make-help
 
 DATE := $(shell date '+%Y/%m/%d')
 TIME := $(shell date '+%H-%M-%S')
@@ -12,6 +12,9 @@ uv-install:
 rmzi:
 	bash ./tools/rmzi.sh
 
+rm-lock:
+	rm -f ./uv.lock
+
 rm-outputs:
 	rm -rf ./outputs
 
@@ -21,7 +24,7 @@ rm-pycache:
 rm-venv:
 	rm -rf .venv
 
-reset: rmzi rm-outputs rm-pycache rm-venv
+reset: rmzi rm-lock rm-outputs rm-pycache rm-venv
 
 start:
 	mkdir -p $(MAIN_OUTPUT_DIR) && \
@@ -29,3 +32,6 @@ start:
 
 help: FULL_ARGS = --help $(ARGS)
 help: start
+
+make-help:
+	cat ./make-man.txt

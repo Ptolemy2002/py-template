@@ -1,22 +1,20 @@
+# The main entry point for the uv script.
 import argparse
+import utils
 
-def main():
+# Put any files that are an output of the script here. "log.txt" will already exist.
+OUTPUTS_DIR = utils.get_latest_outputs_dir()
+
+def main() -> None:
+    print(f"Outputs directory: {OUTPUTS_DIR}")
     print("Hello, World!")
 
 
 if __name__ == "__main__":
-    man = "No manual available."
-    try:
-        with open("man.txt", "r") as f:
-            man = f.read()
-    except FileNotFoundError:
-        # Just go with the default message
-        pass
-
     parser = argparse.ArgumentParser(
         description="Basic uv template script.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog=man
+        epilog=utils.get_manual()
     )
 
     """

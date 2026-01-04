@@ -1,0 +1,81 @@
+This makefile provides targets for managing a uv-based Python project template.
+
+Available Targets:
+------------------
+
+uv-install
+  Description: Installs the uv package manager
+  Usage: make uv-install
+  Details: Downloads and runs the official uv installation script from astral.sh
+
+rmzi
+  Description: Removes Zone Identifier files
+  Usage: make rmzi
+  Details: Executes the tools/rmzi.sh script to clean up :Zone.Identifier files
+           that are commonly created when copying files from Windows to WSL
+
+rm-lock
+  Description: Removes the uv lock file
+  Usage: make rm-lock
+  Details: Deletes the uv.lock file in the project root
+
+rm-outputs
+  Description: Removes the outputs directory
+  Usage: make rm-outputs
+  Details: Deletes the entire ./outputs directory and all its contents
+
+rm-pycache
+  Description: Removes Python cache directories
+  Usage: make rm-pycache
+  Details: Deletes all __pycache__ directories in the project root and subdirectories
+
+rm-venv
+  Description: Removes the virtual environment
+  Usage: make rm-venv
+  Details: Deletes the .venv directory
+
+reset
+  Description: Performs a complete cleanup
+  Usage: make reset
+  Details: Runs all cleanup targets in sequence: rmzi, rm-outputs, rm-pycache, rm-venv
+           Use this to restore the project to a clean state
+
+start
+  Description: Runs the main Python script with logging
+  Usage: make start [ARGS="--arg1 value1 --arg2 value2"]
+  Details: Creates a timestamped output directory and runs main.py using uv
+           Output directory structure: outputs/main/YYYY/MM/DD/HH-MM-SS/
+           All output is logged to log.txt in the output directory
+           Pass arguments to main.py using ARGS variable
+  Example: make start ARGS="--input data.csv --verbose"
+
+help
+  Description: Displays help for main.py
+  Usage: make help [ARGS="additional options"]
+  Details: Runs main.py with --help flag and logs output
+           Additional arguments can be passed via ARGS variable
+  Example: make help
+
+make-help
+  Description: Displays this help documentation
+  Usage: make make-help
+  Details: Outputs the contents of make-man.txt to the console
+
+Variables:
+----------
+
+DATE
+  Automatically set to current date in YYYY/MM/DD format
+
+TIME
+  Automatically set to current time in HH-MM-SS format
+
+MAIN_OUTPUT_DIR
+  Output directory path: outputs/main/$(DATE)/$(TIME)
+
+ARGS
+  User-supplied arguments passed to main.py
+  Usage: make start ARGS="your arguments here"
+
+FULL_ARGS
+  Internal variable combining all arguments for main.py
