@@ -1,4 +1,4 @@
-.PHONY: uv-install rmzi rm-outputs rm-pycache rm-venv reset start
+.PHONY: uv-install rmzi rm-outputs rm-pycache rm-venv reset start help
 
 DATE := $(shell date '+%Y/%m/%d')
 TIME := $(shell date '+%H-%M-%S')
@@ -27,6 +27,5 @@ start:
 	mkdir -p $(MAIN_OUTPUT_DIR) && \
 	uv run ./main.py $(FULL_ARGS) 2>&1 | tee $(MAIN_OUTPUT_DIR)/log.txt
 
-# Alternative start example (put both following lines together):
-# start_with_first_arg: FULL_ARGS = first_arg $(ARGS)
-# start_with_first_arg: start
+help: FULL_ARGS = --help $(ARGS)
+help: start
