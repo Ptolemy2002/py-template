@@ -4,4 +4,6 @@ version = "0.1.0"
 description = "{{ tmplr.project_description }}"
 readme = "README.md"
 requires-python = ">={{ tmplr.python_version }}"
-dependencies = []
+dependencies = [
+    "colorama>=0.4.6"
+]

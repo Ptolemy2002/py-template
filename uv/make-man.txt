@@ -3,6 +3,11 @@ This makefile provides targets for managing a uv-based Python project template.
 Available Targets:
 ------------------
 
+dep-install
+  Description: Installs required Linux dependencies
+  Usage: make dep-install
+  Details: Installs colorized-logs and moreutils packages using apt
+
 uv-install
   Description: Installs the uv package manager
   Usage: make uv-install
@@ -45,8 +50,8 @@ start
   Usage: make start [ARGS="--arg1 value1 --arg2 value2"]
   Details: Creates a timestamped output directory and runs main.py using uv
            Output directory structure: outputs/main/YYYY/MM/DD/HH-MM-SS/
-           All output is logged to log.txt in the output directory
-           Pass arguments to main.py using ARGS variable
+           All output is logged to log.txt in the output directory, but without
+           ansi color codes. Pass arguments to main.py using ARGS variable
   Example: make start ARGS="--input data.csv --verbose"
 
 help

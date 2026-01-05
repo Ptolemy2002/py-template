@@ -1,10 +1,13 @@
-.PHONY: uv-install rmzi rm-lock rm-outputs rm-pycache rm-venv reset start help make-help
+.PHONY: dep-install uv-install rmzi rm-lock rm-outputs rm-pycache rm-venv reset start help make-help
 
 DATE := $(shell date '+%Y/%m/%d')
 TIME := $(shell date '+%H-%M-%S')
 
 MAIN_OUTPUT_DIR = outputs/main/$(DATE)/$(TIME)
 FULL_ARGS = $(ARGS)
+
+dep-install:
+	apt install colorized-logs moreutils -y
 
 uv-install:
 	curl -LsSf https://astral.sh/uv/install.sh | sh

@@ -8,5 +8,9 @@
 ## Requirements
 **Minimum Python Version:** {{ tmplr.python_version }}
 
-**Dependencies:**
-* N/A
+**Python Dependencies:**
+* `colorama` - for cross-platform colored terminal text.
+
+**Linux Dependencies:**
+* `colorized-logs` - for removing ANSI color codes from log files.
+* `moreutils` - for the `sponge` command used in log file processing.

@@ -1,6 +1,17 @@
 # A file for utility functions used by the uv script. You could put more utilities here as needed.
 from datetime import datetime
 import os
+import warnings
+from colorama import Fore
+
+# Always show user warnings to the console
+warnings.simplefilter('always', UserWarning)
+
+# Make warnings print in one line
+def warning_on_one_line(message, category, filename, lineno, file=None, line=None) -> str:
+    return Fore.YELLOW + '%s: %s\n' % (category.__name__, message) + Fore.RESET
+
+warnings.formatwarning = warning_on_one_line
 
 def get_latest_main_outputs_dir() -> str:
     now: datetime = datetime.now()
