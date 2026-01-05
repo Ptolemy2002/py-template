@@ -2,9 +2,9 @@
 from datetime import datetime
 import os
 
-def get_latest_outputs_dir():
+def get_latest_outputs_dir(namespace: str = "main"):
     now: datetime = datetime.now()
-    result: str = f"outputs/main/{now.year}/{now.month:02d}/{now.day:02d}"
+    result: str = f"outputs/{namespace}/{now.year}/{now.month:02d}/{now.day:02d}"
 
     # Find the folder representing the latest time with its name
     # Any errors happening here should be fatal, as it indicates the script

@@ -3,7 +3,7 @@ import argparse
 import utils
 
 # Put any files that are an output of the script here. "log.txt" will already exist.
-OUTPUTS_DIR = utils.get_latest_outputs_dir()
+OUTPUTS_DIR = utils.get_latest_outputs_dir("main")
 
 def main() -> None:
     print(f"Outputs directory: {OUTPUTS_DIR}")
