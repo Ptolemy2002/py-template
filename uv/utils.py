@@ -2,9 +2,9 @@
 from datetime import datetime
 import os
 
-def get_latest_outputs_dir(namespace: str = "main"):
+def get_latest_main_outputs_dir() -> str:
     now: datetime = datetime.now()
-    result: str = f"outputs/{namespace}/{now.year}/{now.month:02d}/{now.day:02d}"
+    result: str = f"outputs/main/{now.year}/{now.month:02d}/{now.day:02d}"
 
     # Find the folder representing the latest time with its name
     # Any errors happening here should be fatal, as it indicates the script
@@ -24,6 +24,20 @@ def get_latest_outputs_dir(namespace: str = "main"):
     if max_time_folder_name is not None:
         result = result + f"/{max_time_folder_name}"
 
+    return result
+
+def get_latest_outputs_dir(namespace: str) -> str:
+    # Since the makefile only creates the outputs folder for the main namespace,
+    # we create the outputs folder for other namespaces here.
+    main_outputs_dir: str = get_latest_main_outputs_dir()
+    if namespace == "main":
+        return main_outputs_dir
+    
+    # For consistency, we will use the same timestamp as was used for main.
+    # But here, we will create the folders ourselves instead of fatally erroring out
+    # if they do not exist.
+    result: str = main_outputs_dir.replace("/main/", f"/{namespace}/", 1)
+    os.makedirs(result, exist_ok=True)
     return result
 
 def get_manual() -> str:
