@@ -1,86 +1,85 @@
-This makefile provides targets for managing a uv-based Python project template.
+MAKEFILE REFERENCE
+==================
 
-Available Targets:
-------------------
+This Makefile provides targets for managing a Python project template. The script
+must be run through `make start` (not directly via python/uv) because utilities
+expect the output directory structure created by the start target.
 
-dep-install
-  Description: Installs required Linux dependencies
-  Usage: make dep-install
-  Details: Installs colorized-logs and moreutils packages using apt
+QUICK START
+-----------
 
-uv-install
-  Description: Installs the uv package manager
-  Usage: make uv-install
-  Details: Downloads and runs the official uv installation script from astral.sh
+  make start ARGS="your arguments here"    Run main.py with optional arguments
+  make help ARGS="extra flags"             Show main.py help message
+  make reset                                Clean everything and start fresh
 
-rmzi
-  Description: Removes Zone Identifier files
-  Usage: make rmzi
-  Details: Executes the tools/rmzi.sh script to clean up :Zone.Identifier files
-           that are commonly created when copying files from Windows to WSL
-
-rm-lock
-  Description: Removes the uv lock file
-  Usage: make rm-lock
-  Details: Deletes the uv.lock file in the project root
-
-rm-outputs
-  Description: Removes the outputs directory
-  Usage: make rm-outputs
-  Details: Deletes the entire ./outputs directory and all its contents
-
-rm-pycache
-  Description: Removes Python cache directories
-  Usage: make rm-pycache
-  Details: Deletes all __pycache__ directories in the project root and subdirectories
-
-rm-venv
-  Description: Removes the virtual environment
-  Usage: make rm-venv
-  Details: Deletes the .venv directory
-
-reset
-  Description: Performs a complete cleanup
-  Usage: make reset
-  Details: Runs all cleanup targets in sequence: rmzi, rm-outputs, rm-pycache, rm-venv
-           Use this to restore the project to a clean state
+MAIN TARGETS
+------------
 
 start
-  Description: Runs the main Python script with logging
-  Usage: make start [ARGS="--arg1 value1 --arg2 value2"]
-  Details: Creates a timestamped output directory and runs main.py using uv
-           Output directory structure: outputs/main/YYYY/MM/DD/HH-MM-SS/
-           All output is logged to log.txt in the output directory, but without
-           ansi color codes. Pass arguments to main.py using ARGS variable
-  Example: make start ARGS="--input data.csv --verbose"
+  Creates a timestamped output directory and runs main.py, capturing all output
+  to a log file. The log is cleaned of ANSI color codes for readability.
+  
+  Example: make start ARGS="--verbose --input data.txt"
+  
+  Output location: outputs/main/YYYY/MM/DD/HH-MM-SS/log.txt
 
 help
-  Description: Displays help for main.py
-  Usage: make help [ARGS="additional options"]
-  Details: Runs main.py with --help flag and logs output
-           Additional arguments can be passed via ARGS variable
-  Example: make help
+  Shows main.py's help message. You can pass additional flags via ARGS.
+  
+  Example: make help ARGS="--advanced"
 
 make-help
-  Description: Displays this help documentation
-  Usage: make make-help
-  Details: Outputs the contents of make-man.txt to the console
+  Displays this help message.
 
-Variables:
-----------
+reset
+  Nuclear option: removes all generated files, caches, lock files, and virtual
+  environments. Use this when things are broken or you want a clean slate.
+  Runs: rmzi, rm-lock, rm-outputs, rm-pycache, rm-venv
 
-DATE
-  Automatically set to current date in YYYY/MM/DD format
+CLEANUP TARGETS
+---------------
 
-TIME
-  Automatically set to current time in HH-MM-SS format
+rmzi
+  Remove Zone Identifier files (those annoying ":Zone.Identifier" files that
+  appear when copying from Windows to WSL).
 
-MAIN_OUTPUT_DIR
-  Output directory path: outputs/main/$(DATE)/$(TIME)
+rm-lock
+  Deletes uv.lock to force dependency resolution from scratch.
 
-ARGS
-  User-supplied arguments passed to main.py
-  Usage: make start ARGS="your arguments here"
+rm-outputs
+  Removes the entire outputs/ directory and all logs.
 
-FULL_ARGS
-  Internal variable combining all arguments for main.py
+rm-pycache
+  Cleans Python bytecode cache directories recursively.
+
+rm-venv
+  Removes the .venv virtual environment.
+
+SETUP TARGETS
+-------------
+
+dep-install
+  Installs system dependencies (colorized-logs and moreutils). Requires apt/sudo.
+
+uv-install
+  Installs the uv package manager via official installer script.
+
+
+ARGUMENTS
+---------
+
+Pass arguments to main.py using ARGS variable:
+
+  make start ARGS="--config settings.json --debug"
+  make help ARGS="--advanced-options"
+
+The help target automatically prepends --help to whatever you pass in ARGS.
+
+
+NOTES
+-----
+
+- All timestamps use your local timezone
+- Log files contain both stdout and stderr
+- ANSI color codes are stripped from final log files for easier parsing
+- Don't run main.py directly; always use `make start`
