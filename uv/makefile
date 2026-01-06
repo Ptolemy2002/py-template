@@ -32,6 +32,7 @@ reset: rmzi rm-lock rm-outputs rm-pycache rm-venv
 start:
 	mkdir -p $(MAIN_OUTPUT_DIR) && \
 	uv run ./main.py $(FULL_ARGS) 2>&1 | tee $(MAIN_OUTPUT_DIR)/log.txt
+	(cat $(MAIN_OUTPUT_DIR)/log.txt | ansi2txt) | sponge $(MAIN_OUTPUT_DIR)/log.txt
 
 help: FULL_ARGS = --help $(ARGS)
 help: start
