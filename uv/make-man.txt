@@ -21,7 +21,7 @@ start
   
   Example: make start ARGS="--verbose --input data.txt"
   
-  Output location: outputs/main/YYYY/MM/DD/HH-MM-SS/log.txt
+  Output location: src/outputs/main/YYYY/MM/DD/HH-MM-SS/log.txt
 
 help
   Shows main.py's help message. You can pass additional flags via ARGS.
@@ -47,7 +47,7 @@ rm-lock
   Deletes uv.lock to force dependency resolution from scratch.
 
 rm-outputs
-  Removes the entire outputs/ directory and all logs.
+  Removes the entire src/outputs/ directory and all logs.
 
 rm-pycache
   Cleans Python bytecode cache directories recursively.

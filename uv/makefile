@@ -3,7 +3,7 @@
 DATE := $(shell date '+%Y/%m/%d')
 TIME := $(shell date '+%H-%M-%S')
 
-MAIN_OUTPUT_DIR = outputs/main/$(DATE)/$(TIME)
+MAIN_OUTPUT_DIR = src/outputs/main/$(DATE)/$(TIME)
 FULL_ARGS = $(ARGS)
 
 dep-install:
@@ -19,7 +19,7 @@ rm-lock:
 	rm -f ./uv.lock
 
 rm-outputs:
-	rm -rf ./outputs
+	rm -rf ./src/outputs
 
 rm-pycache:
 	rm -rf __pycache__ **/__pycache__
@@ -31,7 +31,7 @@ reset: rmzi rm-lock rm-outputs rm-pycache rm-venv
 
 start:
 	mkdir -p $(MAIN_OUTPUT_DIR) && \
-	uv run ./main.py $(FULL_ARGS) 2>&1 | tee $(MAIN_OUTPUT_DIR)/log.txt
+	uv run ./src/main.py $(FULL_ARGS) 2>&1 | tee $(MAIN_OUTPUT_DIR)/log.txt
 	(cat $(MAIN_OUTPUT_DIR)/log.txt | ansi2txt) | sponge $(MAIN_OUTPUT_DIR)/log.txt
 
 help: FULL_ARGS = --help $(ARGS)
