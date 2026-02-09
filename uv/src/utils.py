@@ -15,7 +15,7 @@ warnings.formatwarning = warning_on_one_line
 
 def get_latest_main_outputs_dir() -> str:
     now: datetime = datetime.now()
-    result: str = f"outputs/main/{now.year}/{now.month:02d}/{now.day:02d}"
+    result: str = f"./src/outputs/main/{now.year}/{now.month:02d}/{now.day:02d}"
 
     # Find the folder representing the latest time with its name
     # Any errors happening here should be fatal, as it indicates the script
@@ -54,7 +54,7 @@ def get_latest_outputs_dir(namespace: str) -> str:
 def get_manual() -> str:
     man = "No manual available."
     try:
-        with open("man.txt", "r") as f:
+        with open("./src/man.txt", "r") as f:
             man = f.read()
     except FileNotFoundError:
         # Just go with the default message
