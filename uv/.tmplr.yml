@@ -38,7 +38,7 @@ steps:
     include hidden: true
 
   # Update man.txt and make-man.txt
-  - update: man.txt
+  - update: src/man.txt
     include hidden: true
   - update: make-man.txt
     include hidden: true
