@@ -1,10 +1,10 @@
 # The main entry point for the uv script.
 import argparse
-import utils
+import utils.output as output_utils
 from warnings import warn
 
 # Put any files that are an output of the script here. "log.txt" will already exist.
-OUTPUTS_DIR = utils.get_latest_outputs_dir("main")
+OUTPUTS_DIR = output_utils.get_latest_outputs_dir("main")
 
 def main() -> None:
     print(f"Outputs directory: {OUTPUTS_DIR}")
@@ -15,7 +15,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Basic uv template script.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog=utils.get_manual()
+        epilog=output_utils.get_manual()
     )
 
     """
