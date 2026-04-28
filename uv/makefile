@@ -1,4 +1,6 @@
-.PHONY: dep-install uv-install rmzi rm-lock rm-outputs rm-pycache rm-venv reset start help make-help
+.PHONY: dep-install uv-install rmzi rm-lock rm-outputs rm-pycache rm-venv act-venv reset start help make-help
+
+SHELL := /bin/bash
 
 DATE := $(shell date '+%Y/%m/%d')
 TIME := $(shell date '+%H-%M-%S')
@@ -30,6 +32,8 @@ rm-venv:
 reset: rmzi rm-lock rm-outputs rm-pycache rm-venv
 
 start:
+	[ -d .venv ] || uv sync && \
+	source .venv/bin/activate && \
 	mkdir -p $(MAIN_OUTPUT_DIR) && \
 	uv run ./src/main.py $(FULL_ARGS) 2>&1 | tee $(MAIN_OUTPUT_DIR)/log.txt
 	(cat $(MAIN_OUTPUT_DIR)/log.txt | ansi2txt) | sponge $(MAIN_OUTPUT_DIR)/log.txt
