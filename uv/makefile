@@ -1,4 +1,4 @@
-.PHONY: dep-install uv-install rmzi rm-lock rm-outputs rm-pycache rm-venv act-venv reset start help make-help
+.PHONY: dep-install uv-install rmzi rm-lock rm-outputs rm-pycache rm-venv act-venv reset start help usage man make-help
 
 SHELL := /bin/bash
 
@@ -40,6 +40,12 @@ start:
 
 help: FULL_ARGS = --help $(ARGS)
 help: start
+
+usage: FULL_ARGS = -u $(ARGS)
+usage: start
+
+man: FULL_ARGS = -m $(ARGS)
+man: start
 
 make-help:
 	cat ./make-man.txt

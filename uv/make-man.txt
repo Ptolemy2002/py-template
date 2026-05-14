@@ -24,9 +24,25 @@ start
   Output location: src/outputs/main/YYYY/MM/DD/HH-MM-SS/log.txt
 
 help
-  Shows main.py's help message. You can pass additional flags via ARGS.
-  
-  Example: make help ARGS="--advanced"
+  Description: Displays help for main.py
+  Usage: make help [ARGS="additional options"]
+  Details: Runs main.py with --help flag and logs output
+           Additional arguments can be passed via ARGS variable
+  Example: make help
+
+usage
+  Description: Displays usage information for main.py
+  Usage: make usage [ARGS="additional options"]
+  Details: Runs main.py with -u flag to show usage information
+           Additional arguments can be passed via ARGS variable
+  Example: make usage
+
+man
+  Description: Displays the detailed manual for main.py
+  Usage: make man [ARGS="additional options"]
+  Details: Runs main.py with -m flag to show the full manual
+           Additional arguments can be passed via ARGS variable
+  Example: make man
 
 make-help
   Displays this help message.
@@ -75,6 +91,24 @@ Pass arguments to main.py using ARGS variable:
 
 The help target automatically prepends --help to whatever you pass in ARGS.
 
+Variables:
+----------
+
+DATE
+  Automatically set to current date in YYYY/MM/DD format
+
+TIME
+  Automatically set to current time in HH-MM-SS format
+
+MAIN_OUTPUT_DIR
+  Output directory path: ./src/outputs/main/$(DATE)/$(TIME)
+
+ARGS
+  User-supplied arguments passed to main.py
+  Usage: make start ARGS="your arguments here"
+
+FULL_ARGS
+  Internal variable combining all arguments for main.py
 
 NOTES
 -----
