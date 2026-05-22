@@ -32,11 +32,13 @@ rm-venv:
 reset: rmzi rm-lock rm-outputs rm-pycache rm-venv
 
 start:
-	[ -d .venv ] || uv sync && \
-	source .venv/bin/activate && \
+	([ -d .venv ] || uv sync) && \
+	. .venv/bin/activate && \
 	mkdir -p $(MAIN_OUTPUT_DIR) && \
-	uv run ./src/main.py $(FULL_ARGS) 2>&1 | tee $(MAIN_OUTPUT_DIR)/log.txt
-	(cat $(MAIN_OUTPUT_DIR)/log.txt | ansi2txt) | sponge $(MAIN_OUTPUT_DIR)/log.txt
+	export PY_MAKE_ACTIVE=1 && \
+	(uv run ./src/main.py $(FULL_ARGS) 2>&1 | tee $(MAIN_OUTPUT_DIR)/log.txt) && \
+	(cat $(MAIN_OUTPUT_DIR)/log.txt | ansi2txt | sponge $(MAIN_OUTPUT_DIR)/log.txt) && \
+	export PY_MAKE_ACTIVE=0
 
 help: FULL_ARGS = --help $(ARGS)
 help: start

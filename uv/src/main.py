@@ -8,7 +8,6 @@ from warnings import warn
 OUTPUTS_DIR = output_utils.get_latest_outputs_dir("main")
 
 def main() -> None:
-    print(f"Outputs directory: {OUTPUTS_DIR}")
     print("Hello, World!")
 
 
@@ -62,5 +61,7 @@ def parse_args(og_args: list[str]):
 
 
 if __name__ == "__main__":
+    print(f"Outputs directory: {OUTPUTS_DIR}")
+    print(f"Run with make: {output_utils.RUN_WITH_MAKE}")
     args = parse_args(sys.argv[1:])
     main()

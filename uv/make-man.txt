@@ -2,8 +2,9 @@ MAKEFILE REFERENCE
 ==================
 
 This Makefile provides targets for managing a Python project. The script
-must be run through `make start` (not directly via python/uv) because utilities
-expect the output directory structure created by the start target.
+should be run through `make start` (not directly via python/uv) because the
+script's output is captured and sent to a log file in a structured output directory.
+It will run without make, but you won't get the log file.
 
 QUICK START
 -----------
