@@ -4,7 +4,8 @@ from utils.argparse import get_or_create_arg_parser, parse_args
 import sys
 from warnings import warn
 
-# Put any files that are an output of the script here. "log.txt" will already exist.
+# Put any files that are an output of the script here. "log.txt" will be written here after the script is done
+# if run with make.
 OUTPUTS_DIR = output_utils.get_latest_outputs_dir("main")
 
 def main() -> None:
