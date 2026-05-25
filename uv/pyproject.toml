@@ -5,5 +5,6 @@ description = "{{ tmplr.project_description }}"
 readme = "README.md"
 requires-python = ">={{ tmplr.python_version }}"
 dependencies = [
+    "argparse>=1.4.0",
     "colorama>=0.4.6"
 ]

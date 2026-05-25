@@ -1,6 +1,6 @@
 # The main entry point for the uv script.
-import argparse
 import utils.output as output_utils
+from utils.argparse import get_or_create_arg_parser, parse_args
 import sys
 from warnings import warn
 
@@ -11,57 +11,42 @@ def main() -> None:
     print("Hello, World!")
 
 
-parser: argparse.ArgumentParser | None = None
-def get_arg_parser() -> argparse.ArgumentParser:
-    global parser
+if __name__ == "__main__":
+    print(f"Outputs directory: {OUTPUTS_DIR}")
+    print(f"Run with make: {output_utils.RUN_WITH_MAKE}")
+    parser = get_or_create_arg_parser(
+        "global",
+        description="Basic uv template script.",
+        arg_defs=[
+            {
+                "flags": ["--usage", "-u"],
+                "action": "store_true",
+                "help": "Print usage instructions and examples, then exit."
+            },
+            {
+                "flags": ["--manual", "-m"],
+                "action": "store_true",
+                "help": "Print detailed manual, then exit."
+            },
 
-    if parser is None:
-        parser = argparse.ArgumentParser(
-            description="Basic uv template script.",
-            formatter_class=argparse.RawDescriptionHelpFormatter
-        )
+            # {
+            #    "flags": ["arg"],
+            #    "type": str,
+            #    "default": "default_value",
+            #    "nargs": "?",
+            #    "help": "An example argument."
+            # }
+        ]
+    )
 
-        parser.add_argument(
-            "--usage", "-u",
-            action="store_true",
-            help="Print usage instructions and examples, then exit."
-        )
-
-        parser.add_argument(
-            "--manual", "-m",
-            action="store_true",
-            help="Print detailed manual, then exit."
-        )
-
-        """
-        parser.add_argument(
-            "arg",
-            type=str,
-            default="default_value",
-            nargs="?",
-            help="An example argument."
-        )
-        """
-    
-    return parser
-
-def parse_args(og_args: list[str]):
-    arg_parser = get_arg_parser()
-    args = arg_parser.parse_args(og_args)
+    args = parse_args(sys.argv[1:], name="global")
 
     if args.usage:
-        arg_parser.print_usage()
+        parser.print_usage()
         exit(0)
 
     if args.manual:
         print(output_utils.get_manual())
         exit(0)
 
-    return args
-
-
-if __name__ == "__main__":
-    print(f"Outputs directory: {OUTPUTS_DIR}")
-    print(f"Run with make: {output_utils.RUN_WITH_MAKE}")
-    args = parse_args(sys.argv[1:])
     main()
