@@ -1,7 +1,5 @@
-from html import parser
 from typing import TypedDict, Literal, NotRequired, Any, Callable, Sequence, cast, Unpack
 from argparse import ArgumentParser, Action, RawDescriptionHelpFormatter
-import utils.output as output_utils
 
 # Manually typing valid ArgParse inputs so that we can use them with type safety
 CLIAction = Literal[
