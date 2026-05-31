@@ -6,5 +6,6 @@ readme = "README.md"
 requires-python = ">={{ tmplr.python_version }}"
 dependencies = [
     "argparse>=1.4.0",
-    "colorama>=0.4.6"
+    "colorama>=0.4.6",
+    "pytest>=9.0.3"
 ]
