@@ -24,6 +24,11 @@ start
   
   Output location: src/outputs/main/YYYY/MM/DD/HH-MM-SS/log.txt
 
+test
+  Runs the test suite using pytest, with the verbose flag for detailed output.
+
+  Example: make test
+
 help
   Description: Displays help for main.py
   Usage: make help [ARGS="additional options"]

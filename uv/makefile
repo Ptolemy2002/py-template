@@ -40,6 +40,13 @@ start:
 	(cat $(MAIN_OUTPUT_DIR)/log.txt | ansi2txt | sponge $(MAIN_OUTPUT_DIR)/log.txt) && \
 	export PY_MAKE_ACTIVE=0
 
+test:
+	([ -d .venv ] || uv sync) && \
+	. .venv/bin/activate && \
+	export PY_MAKE_ACTIVE=1 && \
+	pytest . -v && \
+	export PY_MAKE_ACTIVE=0
+
 help: FULL_ARGS = --help $(ARGS)
 help: start
 
