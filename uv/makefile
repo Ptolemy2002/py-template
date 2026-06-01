@@ -47,6 +47,13 @@ test:
 	pytest . -vs $(FULL_ARGS) && \
 	export PY_MAKE_ACTIVE=0
 
+test-cov:
+	([ -d .venv ] || uv sync) && \
+	. .venv/bin/activate && \
+	export PY_MAKE_ACTIVE=1 && \
+	pytest . -vs --cov=src --cov-report=term-missing --cov-report=html $(FULL_ARGS) && \
+	export PY_MAKE_ACTIVE=0
+
 help: FULL_ARGS = --help $(ARGS)
 help: start
 

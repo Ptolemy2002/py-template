@@ -29,6 +29,12 @@ test
 
   Example: make test
 
+test-cov
+  Runs the test suite with coverage reporting, generating an HTML report in the
+  htmlcov/ directory.
+
+  Example: make test-cov
+
 help
   Description: Displays help for main.py
   Usage: make help [ARGS="additional options"]
