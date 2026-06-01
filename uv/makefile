@@ -44,7 +44,7 @@ test:
 	([ -d .venv ] || uv sync) && \
 	. .venv/bin/activate && \
 	export PY_MAKE_ACTIVE=1 && \
-	pytest . -v && \
+	pytest . -vs $(FULL_ARGS) && \
 	export PY_MAKE_ACTIVE=0
 
 help: FULL_ARGS = --help $(ARGS)
